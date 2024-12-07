@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block modal_content %}
+        <div class="container">
+            <!-- Codrops top bar -->
+   '         <section style="margin-top:90px;">
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            <form  action="{% url 'user_login' %}" method="POST" autocomplete="on">
+                              {% csrf_token %}
+
+                                <input type="hidden" name="p_type" value={{ p_type }}>
+                                <input type="hidden" name="property_id" value={{ property_id }}>
+
+
+                                <h1>Log in</h1>
+                                <p>
+                                    <label for="username" class="username" data-icon="u" > Your email or username </label>
+                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                                </p>
+                                <p>
+                                    <label for="password" class="yourpasswd" data-icon="p"> Your password </label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                </p>
+                                <p class="keeplogin">
+									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+									<label for="loginkeeping">Keep me logged in</label>
+								</p>
+                                <p class="login button">
+                                    <input type="submit" value="Login" />
+								</p>
+                                <p class="change_link">
+									Not a member yet ?
+									<a href={% url 'register' %} class="to_register">Join us</a>
+								</p>
+                            </form>
+                        </div>
+
+                        <div id="register" class="animate form">
+                            <form  action="{% url 'register' %}" method="POST" autocomplete="on">
+                                <h1> Sign up </h1>
+                                 <p>
+                                    <label for="usernamesignup" class="username" data-icon="u">Your username</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername" />
+                                </p>
+                                <p>
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
+                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
+                                </p> <p>
+                                    <label for="phone_no" class="yourcontact" data-icon="e" > Your contact</label>
+                                    <input id="number" name="phon_no" required="required" type="number" placeholder="mysupercontact"/>
+                                </p>
+                                <p>
+                                    <label for="passwordsignup" class="yourpasswd" data-icon="p">Your password </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p>
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p> -->
+                                {% csrf_token %}
+                                <-- {{ form.as_p }} -->
+                                <-- {% for field in form %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+        <label for="id_{{ field.name }}" class="control-label">{{ field.label }}</label>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+            </div>
+              {{ field }}
+        </div>
+    </div>
+{% endfor %} -->
+
+{% for field in form %}
+  {% bootstrap_field field %}
+{% endfor in form%}
+<input type="hidden" name="p_type" value={{ p_type }}>
+<input type="hidden" name="property_id" value={{ property_id }}>
+
+                                <p class="signin button">
+									<input type="submit" value="Sign up"/>
+								</p>
+                                <p class="change_link">
+									Already a member ?
+									<a href={% url 'user_login' %} class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
+<br>
+<br>
+{% endblock %}
